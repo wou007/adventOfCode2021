@@ -3,15 +3,13 @@ import timeit
 
 def part1(input):
     result = 0
-    draws = input[0].split(',')
-    draws = list(map(int,draws))
+    draws = list(map(int,input[0].split(',')))
 
     card = []
     cards = []
     for line in input[2:]:
         if len(line) > 0:
-            line = line.split(' ')
-            line = filter(None, line)
+            line = filter(None, line.split(' '))
             card.append(list(map(int,line)))
         else:
             cards.append(card.copy())
@@ -23,10 +21,10 @@ def part1(input):
             performDraw(c,d)
             if checkHorizontal(c) or checkVertical(c):
                 for a in c:
-                    for b in a:
-                        if(b != 1337):
-                            result += b
+                    result += sum(a)
+        
         if result != 0:
+            result %= 1337
             result *= d
             break
     
@@ -34,15 +32,13 @@ def part1(input):
 
 def part2(input):
     result = 0
-    draws = input[0].split(',')
-    draws = list(map(int,draws))
+    draws = list(map(int,input[0].split(',')))
 
     card = []
     cards = []
     for line in input[2:]:
         if len(line) > 0:
-            line = line.split(' ')
-            line = filter(None, line)
+            line = filter(None, line.split(' '))
             card.append(list(map(int,line)))
         else:
             cards.append(card.copy())
@@ -51,22 +47,19 @@ def part2(input):
 
     for d in draws:
         countLeftOver = 0
-        countFinished = 0
         result = 0
         for c in cards:
             if not checkHorizontal(c) and not checkVertical(c):
                 performDraw(c,d)
-                if checkHorizontal(c) or checkVertical(c):
-                    countFinished += 1
-                    if countFinished == 1:
+                if countLeftOver == 0 and (checkHorizontal(c) or checkVertical(c)):
+                    if result == 0:
                         for a in c:
-                            for b in a:
-                                if b != 1337:
-                                    result += b
+                            result += sum(a)
                 else:
                     countLeftOver += 1
                 
         if countLeftOver == 0:
+            result %= 1337
             result *= d
             break
     
@@ -75,12 +68,8 @@ def part2(input):
 def checkHorizontal(card):
     result = False
     for x in card:
-        complete = True
-        for y in x:
-            if y != 1337:
-                complete = False
-        if complete:
-            result = complete
+        if x.count(1337) == len(x):
+            result = True
     
     return result
 
@@ -91,16 +80,18 @@ def checkVertical(card):
         for x in card:
             if x[i] != 1337:
                 complete = False
+                break
         if complete:
             result = complete
+            break
     
     return result
 
 def performDraw(card, draw):
     for x in card:
-        for i, n in enumerate(x):
-            if(n == draw):
-                x[i] = 1337
+        if draw in x:
+            x[x.index(draw)] = 1337
+            break
 
 if __name__ == "__main__":
     f = open("Day4/input.txt","r")
@@ -109,7 +100,7 @@ if __name__ == "__main__":
     print(f"Part 1: {part1(input)}")
     print(f"Part 2: {part2(input)}")
 
-    runs = 1
+    runs = 5
 
     t1 = timeit.timeit(lambda: part1(input), number=runs)
     t2 = timeit.timeit(lambda: part2(input), number=runs)
