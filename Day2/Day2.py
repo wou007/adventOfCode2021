@@ -8,11 +8,11 @@ def part1(input):
     for i in input:
         a = i.split(' ')
         if a[0] == 'up':
-            depth = depth - int(a[1])
+            depth -= int(a[1])
         if a[0] == 'down':
-            depth = depth + int(a[1])
+            depth += int(a[1])
         if a[0] == 'forward':
-            forward = forward + int(a[1])
+            forward += + int(a[1])
     
     return depth * forward
 
@@ -24,12 +24,12 @@ def part2(input):
     for i in input:
         a = i.split(' ')
         if a[0] == 'up':
-            aim = aim - int(a[1])
+            aim -= int(a[1])
         if a[0] == 'down':
-            aim = aim + int(a[1])
+            aim += int(a[1])
         if a[0] == 'forward':
-            forward = forward + int(a[1])
-            depth = depth + (aim * int(a[1]))
+            forward += int(a[1])
+            depth += (aim * int(a[1]))
     
     return depth * forward
 
