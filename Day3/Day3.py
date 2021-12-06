@@ -32,7 +32,7 @@ def part2(input):
     result = 0
     
     temp = input
-    temp2 = input.copy()
+    temp2 = []
     run = 0
     while len(temp) > 1:
         counts = [0] * len(temp[0])
@@ -46,16 +46,17 @@ def part2(input):
             mostValue = '1'
 
         for l in temp:
-            if(l[run] != mostValue):
-                temp2.remove(l)
+            if(l[run] == mostValue):
+                temp2.append(l)
 
         run += 1
         temp = temp2.copy()
+        temp2 = []
     
     oxygen = int(temp[0],2)
 
     temp = input
-    temp2 = input.copy()
+    temp2 = []
     run = 0
     while len(temp) > 1:
         counts = [0] * len(temp[0])
@@ -69,11 +70,12 @@ def part2(input):
             mostValue = '1'
 
         for l in temp:
-            if(l[run] != mostValue):
-                temp2.remove(l)
+            if(l[run] == mostValue):
+                temp2.append(l)
 
         run += 1
         temp = temp2.copy()
+        temp2 = []
 
     co2 = int(temp[0],2)
     
