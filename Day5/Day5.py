@@ -83,7 +83,7 @@ if __name__ == "__main__":
     print(f"Part 1: {part1(input)}")
     print(f"Part 2: {part2(input)}")
 
-    runs = 5
+    runs = 1
 
     t1 = timeit.timeit(lambda: part1(input), number=runs)
     t2 = timeit.timeit(lambda: part2(input), number=runs)
