@@ -20,8 +20,8 @@ def part2(input):
     for i in range(min(input),max(input)):
         fuel = 0
         for c in input:
-            fuel += sum(range(1,abs(c-i)+1))
-        result = min(fuel,result)
+            fuel += abs(c-i) * (abs(c-i) + 1) / 2
+        result = min(int(fuel),result)
     
     return result
 
