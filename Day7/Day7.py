@@ -10,6 +10,9 @@ def part1(input):
         for c in input:
             fuel += abs(c-i)
         result = min(fuel,result)
+
+        if(fuel > result):
+            break
     
     return result
 
@@ -22,6 +25,9 @@ def part2(input):
         for c in input:
             fuel += abs(c-i) * (abs(c-i) + 1) / 2
         result = min(int(fuel),result)
+        
+        if(fuel > result):
+            break
     
     return result
 
