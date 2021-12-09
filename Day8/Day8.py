@@ -97,10 +97,14 @@ def part2(input):
 
         text = ''
 
-        for letters in parts[1].split(' '):
+        results = [sorted(x) for x in results]
+
+        for letters in list(filter(None,parts[1].split(' '))):
+            letters = sorted(letters)
             for i in range(10):
-                if sorted(letters) == sorted(results[i]):
+                if letters == results[i]:
                     text += str(i)
+                    break
         total += int(text)
 
     return total
