@@ -68,8 +68,6 @@ def foldX(paper,index):
     return newPaper
 
 def part2(input):
-    result = 0
-
     points = []
     folds = []
     maxX = 0
